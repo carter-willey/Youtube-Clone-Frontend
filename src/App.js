@@ -41,8 +41,8 @@ class App extends Component {
       <div className="container">
         <div className="row">
           <Switch>
-          <Route path="/" exact><DisplayMostPopularVideos mostPopularVideos={this.state.mostPopularVideos} getVideo={this.getVideo} /> </Route>
-          <Route path="/watchVideo" exact render={(props) => (<WatchVideo {...props}  currentVideo={this.state.currentVideo}/>)} />
+            <Route path="/watchVideo/"><WatchVideo currentVideo={this.state.currentVideo}/> </Route>
+            <Route path="/" exact><DisplayMostPopularVideos mostPopularVideos={this.state.mostPopularVideos} getVideo={this.getVideo} /> </Route>
           </Switch>
         </div>
       </div>
