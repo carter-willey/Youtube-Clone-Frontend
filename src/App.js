@@ -24,11 +24,9 @@ class App extends Component {
     let response = await axios.get(
       `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=10&regionCode=US&key=${ApiKey}`
     );
-    console.log(response);
     this.setState({
       mostPopularVideos: response.data.items,
     });
-    console.log(this.state.mostPopularVideos);
   };
 
   getVideo = (video) => {

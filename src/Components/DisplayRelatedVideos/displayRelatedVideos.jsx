@@ -1,12 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
 import { Card, Button, Container, Row } from "react-bootstrap";
-
-const DisplayMostPopularVideos = (props) => {
-  return (
+import { Link } from "react-router-dom";
+const DisplayRelatedVideos = (props) => {
+  // if (props.relatedVideos[0]  === undefined) {
+  //   props.history.push("/")
+  // }
+  return ( 
+  
     <Container fluid>
       <Row>
-        {props.mostPopularVideos.map((video) => {
+        {props.relatedVideos.map((video) => {
           return (
             <Card className="box" style={{ width: "18rem" }}>
               <Card.Img
@@ -26,7 +29,7 @@ const DisplayMostPopularVideos = (props) => {
         })}
       </Row>
     </Container>
-  );
-};
-
-export default DisplayMostPopularVideos;
+   );
+}
+ 
+export default DisplayRelatedVideos;
