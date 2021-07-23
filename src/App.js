@@ -13,12 +13,20 @@ class App extends Component {
     this.state = {
       mostPopularVideos: [],
       currentVideo: [],
+      searchResults: [],
     };
     console.log(this.props)
   }
 
   componentDidMount() {
     this.getPopularVideos();
+  }
+
+  getSearchResults = async (query) => {
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${query}&key=${ApiKey}`)
+    this.setState({
+      searchResults: response.data.items
+    })
   }
 
   getPopularVideos = async () => {
@@ -31,7 +39,6 @@ class App extends Component {
   };
 
   getVideo = (video) => {
-    console.log(video)
     this.setState({
       currentVideo: video,
     });
@@ -40,7 +47,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <NavBar />
+        <NavBar getSearchResults={this.getSearchResults} />
         <Switch>
           <Route path={`/watchVideo/${this.state.currentVideo.id}`}>
             <WatchVideo currentVideo={this.state.currentVideo} getVideo={this.getVideo} />
