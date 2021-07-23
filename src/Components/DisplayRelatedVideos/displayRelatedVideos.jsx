@@ -10,6 +10,7 @@ const DisplayRelatedVideos = (props) => {
     <Container fluid>
       <Row>
         {props.relatedVideos.map((video) => {
+          console.log(video);
           return (
             <Card className="box" style={{ width: "18rem" }}>
               <Card.Img
