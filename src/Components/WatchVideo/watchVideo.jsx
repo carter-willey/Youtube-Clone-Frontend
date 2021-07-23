@@ -30,9 +30,16 @@ class WatchVideo extends Component {
 }
   
   render() {
+    let url;
+    if (typeof(this.props.currentVideo.id) === 'string'){
+      url = `https://www.youtube.com/embed/${this.props.currentVideo.id}?autoplay=0`
+    }
+    if (typeof(this.props.currentVideo.id) === 'object'){
+      url = `https://www.youtube.com/embed/${this.props.currentVideo.id.videoId}?autoplay=0`
+    }
+
     if (this.state.loading) return null;
     else {
-      console.log(this.props.currentVideo)
     return (
     <Container fluid>
       <iframe
@@ -40,7 +47,7 @@ class WatchVideo extends Component {
         type="text/html"
         width="640"
         height="360"
-        src={`https://www.youtube.com/embed/${this.props.currentVideo.id}?autoplay=0`}
+        src={url}
         frameborder="0"
       ></iframe>
       <VideoDescription currentVideo={this.props.currentVideo} />

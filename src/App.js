@@ -31,6 +31,7 @@ class App extends Component {
   };
 
   getVideo = (video) => {
+    console.log(video)
     this.setState({
       currentVideo: video,
     });
