@@ -6,6 +6,7 @@ import ApiKey from "./ApiKey/apiKey";
 import NavBar from "./Components/NavBar/navBar";
 import DisplayMostPopularVideos from "./Components/DisplayMostPopularVideos/displayMostPopularVideos";
 import WatchVideo from "./Components/WatchVideo/watchVideo";
+import DisplaySearchResults from "./Components/DisplaySearchResults/displaySearchResults";
 
 class App extends Component {
   constructor(props) {
@@ -15,18 +16,19 @@ class App extends Component {
       currentVideo: [],
       searchResults: [],
     };
-    console.log(this.props)
   }
 
   componentDidMount() {
     this.getPopularVideos();
   }
 
-  getSearchResults = async (query) => {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${query}&key=${ApiKey}`)
+  getSearchResults = async (search) => {
+    console.log(search);
+    let response = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${search}&key=${ApiKey}`)
     this.setState({
       searchResults: response.data.items
     })
+    console.log(response);
   }
 
   getPopularVideos = async () => {
@@ -57,6 +59,10 @@ class App extends Component {
               mostPopularVideos={this.state.mostPopularVideos}
               getVideo={this.getVideo}
             />
+          </Route>
+          <Route path="/search/"
+          exact>
+            <DisplaySearchResults searchResults={this.state.searchResults} />
           </Route>
         </Switch>
       </Router>

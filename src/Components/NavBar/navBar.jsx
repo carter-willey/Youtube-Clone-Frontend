@@ -66,7 +66,9 @@ class NavBar extends Component {
               onChange={this.handleChange}
               name="searchQuery"
             />
-            <Button type='submit' variant="outline-success">Search</Button>
+            <Link to="/search/">
+            <Button  type='submit' onClick={() => {this.props.getSearchResults(this.state.searchQuery)}} variant="outline-success">Search</Button>
+            </Link>
           </Form>
         </Navbar.Collapse>
       </Navbar>
