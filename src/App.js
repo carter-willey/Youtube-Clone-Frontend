@@ -24,11 +24,9 @@ class App extends Component {
     let response = await axios.get(
       `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=10&regionCode=US&key=${ApiKey}`
     );
-    console.log(response);
     this.setState({
       mostPopularVideos: response.data.items,
     });
-    console.log(this.state.mostPopularVideos);
   };
 
   getVideo = (video) => {
@@ -36,6 +34,7 @@ class App extends Component {
       currentVideo: video,
     });
   };
+  
 
   render() {
     return (
@@ -43,7 +42,7 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route path="/watchVideo/">
-            <WatchVideo currentVideo={this.state.currentVideo} />
+            <WatchVideo currentVideo={this.state.currentVideo} getVideo={this.getVideo} />
           </Route>
           <Route path="/" exact>
             <DisplayMostPopularVideos
