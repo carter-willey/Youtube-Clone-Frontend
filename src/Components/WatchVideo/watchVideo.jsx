@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 
 class WatchVideo extends Component {
     constructor(props) {

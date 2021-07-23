@@ -1,21 +1,30 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+import { Card, Button, Container, Row } from "react-bootstrap";
 
 const DisplayMostPopularVideos = (props) => {
-  return ( 
-    <div className="container">
-      <div className="row">
+  return (
+    <Container fluid>
+      <Row>
         {props.mostPopularVideos.map((video) => {
-          return(
-            
-              <Link to="/watchVideo/">
-                <div className="col col-md-3"> <img src={video.snippet.thumbnails.medium.url} onClick={() => props.getVideo(video)}/></div>
-              </Link>
-          )
+          return (
+            <Card className="box" style={{ width: "18rem" }}>
+              <Card.Img
+                variant="top"
+                src={video.snippet.thumbnails.medium.url}
+              />
+              <Card.Body>
+                <Card.Title>{video.snippet.title}</Card.Title>
+                <Link to="/watch/video/">
+                  <Button variant="primary">Watch Video</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          );
         })}
-      </div>
-    </div>
-   );
-}
- 
+      </Row>
+    </Container>
+  );
+};
+
 export default DisplayMostPopularVideos;

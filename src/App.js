@@ -1,54 +1,61 @@
-import React, { Component } from 'react';
-import NavBar from './Components/NavBar/navBar';
-import axios from 'axios'
-import DisplayMostPopularVideos from './Components/DisplayMostPopularVideos/displayMostPopularVideos';
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import WatchVideo from './Components/WatchVideo/watchVideo';
+import React, { Component } from "react";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ApiKey from "./ApiKey/apiKey";
+import NavBar from "./Components/NavBar/navBar";
+import DisplayMostPopularVideos from "./Components/DisplayMostPopularVideos/displayMostPopularVideos";
+import WatchVideo from "./Components/WatchVideo/watchVideo";
+import ListCards from "./Components/listCards/ListCards";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       mostPopularVideos: [],
-      currentVideo: []
-     }
+      currentVideo: [],
+    };
   }
 
-  componentDidMount(){
-   this.getPopularVideos() 
-   
+  componentDidMount() {
+    this.getPopularVideos();
   }
 
   getPopularVideos = async () => {
-    let response = await axios.get("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=10&regionCode=US&key=AIzaSyCyZ0D0SYyRBDBvrkaYNVEJJSpCOIz_MVM")
+    let response = await axios.get(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=10&regionCode=US&key=${ApiKey}`
+    );
     console.log(response);
     this.setState({
-      mostPopularVideos: response.data.items
-    })
+      mostPopularVideos: response.data.items,
+    });
     console.log(this.state.mostPopularVideos);
-  }
+  };
 
   getVideo = (video) => {
     this.setState({
-      currentVideo: video
-    })
-  }
+      currentVideo: video,
+    });
+  };
 
-  render() { 
-    return ( 
+  render() {
+    return (
       <Router>
-      <NavBar />
-      <div className="container">
-        <div className="row">
-          <Switch>
-            <Route path="/watchVideo/"><WatchVideo currentVideo={this.state.currentVideo}/> </Route>
-            <Route path="/" exact><DisplayMostPopularVideos mostPopularVideos={this.state.mostPopularVideos} getVideo={this.getVideo} /> </Route>
-          </Switch>
-        </div>
-      </div>
+        <NavBar />
+        <Switch>
+          <Route path="/watchVideo/">
+            <WatchVideo currentVideo={this.state.currentVideo} />{" "}
+          </Route>
+          <Route path="/" exact>
+            <DisplayMostPopularVideos
+              mostPopularVideos={this.state.mostPopularVideos}
+              getVideo={this.getVideo}
+            />{" "}
+          </Route>
+        </Switch>
       </Router>
-     );
+    );
   }
 }
- 
+
 export default App;
