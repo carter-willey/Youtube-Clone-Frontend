@@ -15,8 +15,10 @@ const DisplayMostPopularVideos = (props) => {
               />
               <Card.Body>
                 <Card.Title>{video.snippet.title}</Card.Title>
-                <Link to="/watch/video/">
-                  <Button variant="primary">Watch Video</Button>
+                <Link to="/watchVideo/">
+                  <Button variant="primary" onClick={() => {
+                    props.getVideo(video)
+                  }}>Watch Video</Button>
                 </Link>
               </Card.Body>
             </Card>
