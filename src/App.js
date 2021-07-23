@@ -14,6 +14,7 @@ class App extends Component {
       mostPopularVideos: [],
       currentVideo: [],
     };
+    console.log(this.props)
   }
 
   componentDidMount() {
@@ -34,14 +35,13 @@ class App extends Component {
       currentVideo: video,
     });
   };
-  
 
   render() {
     return (
       <Router>
         <NavBar />
         <Switch>
-          <Route path="/watchVideo/">
+          <Route path={`/watchVideo/${this.state.currentVideo.id}`}>
             <WatchVideo currentVideo={this.state.currentVideo} getVideo={this.getVideo} />
           </Route>
           <Route path="/" exact>
