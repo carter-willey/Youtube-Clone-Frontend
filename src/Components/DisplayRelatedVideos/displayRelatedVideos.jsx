@@ -21,7 +21,7 @@ const DisplayRelatedVideos = (props) => {
               />
               <Card.Body>
                 <Card.Title>{video.snippet.title}</Card.Title>
-                <Link to={`/watchVideo/${video.id}/`}>
+                <Link to={`/watchVideo/${video.id.videoId}/`}>
                   <Button variant="primary" onClick={() => {
                     props.getVideo(video)
                   }}>Watch Video</Button>

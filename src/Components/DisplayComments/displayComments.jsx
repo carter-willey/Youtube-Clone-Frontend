@@ -1,12 +1,19 @@
 import React from "react";
+import {useState} from 'react'
 
 const DisplayComments = (props) => {
-  console.log(props.comments.data[0].comment_text);
+  let inputBox;
+  const [count, setCount]  = useState(1)
+  if (count % 2 === 0){
+     inputBox = <input></input>
+  }
   return props.comments.data.map((comment) => {
     return (
       <div>
-          <h1>Anonymous</h1>
+          <h5>Anonymous</h5>
         <p>{comment.comment_text}</p>
+        <button onClick={() => setCount(count + 1)}>Reply</button>
+        {inputBox}
       </div>
     );
   });
