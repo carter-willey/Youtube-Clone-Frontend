@@ -1,19 +1,24 @@
 import React from "react";
-import {useState} from 'react'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import ThumbDownIcon from '@material-ui/icons/ThumbDown'
 
+
+// getReplies = async (comment) => {
+//   let response = await axios.get(`http://127.0.0.1:8000/videos/reply/${comment.id}/`)
+//   console.log(response)
+  
+// }
 const DisplayComments = (props) => {
-  let inputBox;
-  const [count, setCount]  = useState(1)
-  if (count % 2 === 0){
-     inputBox = <input></input>
-  }
   return props.comments.data.map((comment) => {
     return (
       <div>
           <h5>Anonymous</h5>
         <p>{comment.comment_text}</p>
-        <button onClick={() => setCount(count + 1)}>Reply</button>
-        {inputBox}
+        <i onClick={() => props.likeComment(comment)}><ThumbUpIcon ></ThumbUpIcon></i>
+        <p>likes {comment.likes}</p>
+        <i onClick={() => props.dislikeComment(comment)}><ThumbDownIcon></ThumbDownIcon></i>
+        <p>Dislikes {comment.dislikes}</p>
+        <button>Reply</button>
       </div>
     );
   });
