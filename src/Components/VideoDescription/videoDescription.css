@@ -1,0 +1,14 @@
+.video_description {
+    max-width: 600px;
+    margin-left: 0px;
+    margin-top: 15px;
+}
+
+.video_description > p {
+    font-size: 14px;
+    word-spacing: 1px;
+    line-height: 22px;
+    max-height: 60px;
+    overflow: hidden;
+}
+

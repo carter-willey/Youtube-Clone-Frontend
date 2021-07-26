@@ -11,7 +11,7 @@ const DisplayRelatedVideos = (props) => {
     ) 
   return ( 
     <Container fluid>
-      <Row>
+      <Row className="justify-content-center">
         {filteredVideos.map((video) => {
           return (
             <Card className="box" style={{ width: "18rem" }}>
@@ -21,7 +21,7 @@ const DisplayRelatedVideos = (props) => {
               />
               <Card.Body>
                 <Card.Title>{video.snippet.title}</Card.Title>
-                <Link to={`/watchVideo/${video.id}`}>
+                <Link to={`/watchVideo/${video.id}/`}>
                   <Button variant="primary" onClick={() => {
                     props.getVideo(video)
                   }}>Watch Video</Button>

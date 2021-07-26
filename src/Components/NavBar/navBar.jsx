@@ -13,7 +13,7 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: ""
+      searchQuery: "",
     };
   }
 

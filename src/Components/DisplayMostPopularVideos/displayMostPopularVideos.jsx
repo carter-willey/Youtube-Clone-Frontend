@@ -5,7 +5,7 @@ import { Card, Button, Container, Row } from "react-bootstrap";
 const DisplayMostPopularVideos = (props) => {
   return (
     <Container fluid>
-      <Row>
+      <Row className="justify-content-center">
         {props.mostPopularVideos.map((video) => {
           return (
             <Card className="box" style={{ width: "18rem" }}>
@@ -16,9 +16,13 @@ const DisplayMostPopularVideos = (props) => {
               <Card.Body>
                 <Card.Title>{video.snippet.title}</Card.Title>
                 <Link to={`/watchVideo/${video.id}`}>
-                  <Button variant="primary" onClick={() => {
-                    props.getVideo(video)
-                  }}>Watch Video</Button>
+                  <Button
+                    onClick={() => {
+                      props.getVideo(video);
+                    }}
+                  >
+                    Watch Video
+                  </Button>
                 </Link>
               </Card.Body>
             </Card>

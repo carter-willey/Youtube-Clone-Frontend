@@ -5,8 +5,8 @@ import { Card, Button, Container, Row } from "react-bootstrap";
 const DisplaySearchResults = (props) => {
   console.log(props.searchResults);
   return ( 
-    <Container fluid>
-      <Row>
+    <Container fluid >
+      <Row className="justify-content-center">
         {props.searchResults.map((video) => {
           console.log('hellos');
           return (

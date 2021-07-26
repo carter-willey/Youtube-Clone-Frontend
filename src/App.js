@@ -24,7 +24,7 @@ class App extends Component {
 
   getSearchResults = async (search) => {
     console.log(search);
-    let response = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${search}&key=${ApiKey}`)
+    let response = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=32&q=${search}&key=${ApiKey}`)
     this.setState({
       searchResults: response.data.items
     })
@@ -33,7 +33,7 @@ class App extends Component {
 
   getPopularVideos = async () => {
     let response = await axios.get(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=10&regionCode=US&key=${ApiKey}`
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=32&regionCode=US&key=${ApiKey}`
     );
     this.setState({
       mostPopularVideos: response.data.items,

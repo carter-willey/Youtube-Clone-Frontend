@@ -4,6 +4,7 @@ import VideoDescription from "../VideoDescription/videoDescription";
 import DisplayRelatedVideos from "../DisplayRelatedVideos/displayRelatedVideos";
 import ApiKey from "../../ApiKey/apiKey";
 import axios from "axios";
+import CommentsForm from "../CommentsForm/commentsForm";
 class WatchVideo extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +22,7 @@ class WatchVideo extends Component {
   }
 
   getRelatedVideos = async () => {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${this.props.currentVideo.id}&type=video&key=${ApiKey}`)
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${this.props.currentVideo.id}&type=video&maxResults=18&key=${ApiKey}`)
     console.log(response);
     this.setState({
       relatedVideos: response.data.items,
@@ -41,6 +42,7 @@ class WatchVideo extends Component {
     if (this.state.loading) return null;
     else {
     return (
+      <div>
     <Container fluid>
       <iframe
         id="ytplayer"
@@ -51,8 +53,10 @@ class WatchVideo extends Component {
         frameborder="0"
       ></iframe>
       <VideoDescription currentVideo={this.props.currentVideo} />
-      <DisplayRelatedVideos getVideo={this.props.getVideo} relatedVideos={this.state.relatedVideos}/>
       </Container>
+      <CommentsForm currentVideo={this.props.currentVideo}/>
+      <DisplayRelatedVideos getVideo={this.props.getVideo} relatedVideos={this.state.relatedVideos}/>
+      </div>
     );
     }
   }
