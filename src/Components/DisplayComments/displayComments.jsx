@@ -1,9 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const DisplayComments = () => {
+const DisplayComments = (props) => {
+  console.log(props.comments.data[0].comment_text);
+  return props.comments.data.map((comment) => {
     return (
-        <h1>Hello</h1>
-    )
-}
- 
+      <div>
+          <h1>Anonymous</h1>
+        <p>{comment.comment_text}</p>
+      </div>
+    );
+  });
+};
+
 export default DisplayComments;
