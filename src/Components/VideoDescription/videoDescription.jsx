@@ -3,7 +3,6 @@ import "./videoDescription.css";
 import ShowMoreText from "react-show-more-text";
 
 const VideoDescription = (props) => {
-  console.log(props);
   return (
     <div>
       <h1 className="position-relative">{props.currentVideo.snippet.title}</h1>

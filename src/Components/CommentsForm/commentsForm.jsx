@@ -14,24 +14,33 @@ class CommentsForm extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if(prevProps.currentVideo.id !== this.props.currentVideo.id){
-    console.log(this.props.currentVideo.snippet.title)
-    }
-    else{
-      this.getComments()
-    }
+  componentDidMount() {
+    this.getComments();
   }
 
   getComments = async () => {
     const videoId = this.props.determineId();
     let response = await axios.get(`http://127.0.0.1:8000/videos/${videoId}/`);
     this.setState({
-      comments: response,
+      comments: response.data,
       loading: false,
     });
+    this.getReplies(this.state.comments);
   };
 
+  getReplies = async (comments) => {
+  let replyData = []
+  await Promise.all(comments.map(
+    comment => axios.get(`http://127.0.0.1:8000/videos/reply/${comment.id}/`).then(response => {
+      if(response.data.length !== 0){
+        debugger
+        console.log(response.data)
+        replyData.push(response);
+      }
+    })
+  ))
+  // console.log(replyData)
+  }
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -50,8 +59,6 @@ class CommentsForm extends Component {
 
   postComment = async () => {
     const videoId = this.props.determineId();
-    console.log(videoId);
-    console.log(this.state.commentInput);
     const data = {
       video_id: videoId,
       comment_text: this.state.commentInput,
@@ -61,16 +68,6 @@ class CommentsForm extends Component {
       data
     );
     this.getComments();
-  };
-
-  getReplies = async (commentId) => {
-    let response = await axios.get(
-      `http://127.0.0.1:8000/videos/reply/${commentId}/`
-    );
-    return response.data;
-    // ).then((response) => {
-    //   return response.data;
-    // })
   };
 
   likeComment = async (comment) => {

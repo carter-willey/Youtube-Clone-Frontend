@@ -36,14 +36,12 @@ class WatchVideo extends Component {
   
 
   componentDidMount() {
-    console.log('here')
     this.getRelatedVideos();
   }
 
   getRelatedVideos = async () => {
     let id = this.determineId()
     let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${id}&type=video&maxResults=25&key=${ApiKey}`)
-    console.log(response);
     this.setState({
       relatedVideos: response.data.items,
       loading: false,
