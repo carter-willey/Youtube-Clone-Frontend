@@ -65,7 +65,7 @@ class WatchVideo extends Component {
       ></iframe>
       <VideoDescription currentVideo={this.props.currentVideo} />
       </Container>
-      <CommentsForm currentVideo={this.props.currentVideo}/>
+      <CommentsForm currentVideo={this.props.currentVideo} determineId={this.determineId}/>
       <DisplayRelatedVideos getVideo={this.props.getVideo} relatedVideos={this.state.relatedVideos}/>
       </div>
     );

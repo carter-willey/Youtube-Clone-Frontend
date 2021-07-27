@@ -54,7 +54,8 @@ class CommentsForm extends Component {
   };
 
   postComment = async () => {
-    const videoId = this.props.currentVideo.id;
+    const videoId = this.props.determineId()
+    console.log(videoId)
     console.log(this.state.commentInput);
     const data = {
       video_id: videoId,
