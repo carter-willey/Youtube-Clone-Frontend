@@ -15,31 +15,43 @@ class WatchVideo extends Component {
 
   }
 
+  determineUrl = () => {
+    if (typeof(this.props.currentVideo.id) === 'string'){
+       return (`https://www.youtube.com/embed/${this.props.currentVideo.id}?autoplay=0`)
+    }
+    if (typeof(this.props.currentVideo.id) === 'object'){
+      return(`https://www.youtube.com/embed/${this.props.currentVideo.id.videoId}?autoplay=0`)
+    }
+  }
+
+  determineId = () => {
+    if (typeof(this.props.currentVideo.id) === 'string'){
+      return (this.props.currentVideo.id)
+   }
+   if (typeof(this.props.currentVideo.id) === 'object'){
+     return(this.props.currentVideo.id.videoId)
+   }
+  }
+
+  
+
   componentDidMount() {
+    console.log('here')
     this.getRelatedVideos();
-    console.log(this.props.currentVideo)
   }
 
   getRelatedVideos = async () => {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${this.props.currentVideo.id}&type=video&maxResults=25&key=${ApiKey}`)
+    let id = this.determineId()
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${id}&type=video&maxResults=25&key=${ApiKey}`)
     console.log(response);
     this.setState({
       relatedVideos: response.data.items,
       loading: false,
     })
-}
+  }
   
   render() {
-    let url;
-    if (typeof(this.props.currentVideo.id) === 'string'){
-      url = `https://www.youtube.com/embed/${this.props.currentVideo.id}?autoplay=0`
-    }
-    if (typeof(this.props.currentVideo.id) === 'object'){
-      url = `https://www.youtube.com/embed/${this.props.currentVideo.id.videoId}?autoplay=0`
-    }
-
-    if (this.state.loading) return null;
-    else {
+    let url = this.determineUrl()
     return (
       <div>
     <Container fluid>
@@ -57,7 +69,6 @@ class WatchVideo extends Component {
       <DisplayRelatedVideos getVideo={this.props.getVideo} relatedVideos={this.state.relatedVideos}/>
       </div>
     );
-    }
   }
 }
 

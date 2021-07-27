@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button, Container, Row } from "react-bootstrap";
 
 const DisplaySearchResults = (props) => {
-  console.log(props.searchResults);
-  return ( 
-    <Container fluid >
+  return (
+    <Container fluid>
       <Row className="justify-content-center">
         {props.searchResults.map((video) => {
-          console.log('hellos');
           return (
             <Card className="box" style={{ width: "18rem" }}>
               <Card.Img
@@ -17,10 +15,14 @@ const DisplaySearchResults = (props) => {
               />
               <Card.Body>
                 <Card.Title>{video.snippet.title}</Card.Title>
-                <Link to={`/search/${video.id.videoId}`}>
-                  <Button variant="primary" onClick={() => {
-                    props.getVideo(video)
-                  }}>Watch Video</Button>
+                <Link to={`/watchVideo/${video.id.videoId}`}>
+                  <Button
+                    onClick={() => {
+                      props.getVideo(video);
+                    }}
+                  >
+                    Watch Video
+                  </Button>
                 </Link>
               </Card.Body>
             </Card>
@@ -28,7 +30,7 @@ const DisplaySearchResults = (props) => {
         })}
       </Row>
     </Container>
-   );
-}
- 
+  );
+};
+
 export default DisplaySearchResults;

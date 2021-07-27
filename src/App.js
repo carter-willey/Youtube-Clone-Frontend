@@ -24,12 +24,14 @@ class App extends Component {
 
   getSearchResults = async (search) => {
     console.log(search);
-    let response = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=32&q=${search}&key=${ApiKey}`)
+    let response = await axios.get(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=32&q=${search}&key=${ApiKey}`
+    );
     this.setState({
-      searchResults: response.data.items
-    })
+      searchResults: response.data.items,
+    });
     console.log(response);
-  }
+  };
 
   getPopularVideos = async () => {
     let response = await axios.get(
@@ -42,6 +44,7 @@ class App extends Component {
 
   getVideo = (video) => {
     this.setState({
+      ...this.state,
       currentVideo: video,
     });
   };
@@ -51,18 +54,23 @@ class App extends Component {
       <Router>
         <NavBar getSearchResults={this.getSearchResults} />
         <Switch>
-          <Route path={`/watchVideo/${this.state.currentVideo.id}`}>
-            <WatchVideo currentVideo={this.state.currentVideo} getVideo={this.getVideo} />
-          </Route>
           <Route path="/" exact>
             <DisplayMostPopularVideos
               mostPopularVideos={this.state.mostPopularVideos}
               getVideo={this.getVideo}
             />
           </Route>
-          <Route path="/search/"
-          exact>
-            <DisplaySearchResults searchResults={this.state.searchResults} />
+          <Route path={`/watchVideo/:id`}>
+            <WatchVideo
+              currentVideo={this.state.currentVideo}
+              getVideo={this.getVideo}
+            />
+          </Route>
+          <Route path="/search">
+            <DisplaySearchResults
+              searchResults={this.state.searchResults}
+              getVideo={this.getVideo}
+            />
           </Route>
         </Switch>
       </Router>

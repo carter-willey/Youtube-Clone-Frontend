@@ -70,7 +70,7 @@ class CommentsForm extends Component {
   getReplies = async (commentId) => {
     let response = await axios.get(
       `http://127.0.0.1:8000/videos/reply/${commentId}/`)
-      return response;
+      return response.data;
     // ).then((response) => {
     //   return response.data;
     // })
