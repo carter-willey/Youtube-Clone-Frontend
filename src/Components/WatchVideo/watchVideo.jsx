@@ -12,7 +12,6 @@ class WatchVideo extends Component {
       loading: true,
       relatedVideos: [],
     };
-    console.log(props)
 
   }
 
@@ -22,7 +21,7 @@ class WatchVideo extends Component {
   }
 
   getRelatedVideos = async () => {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${this.props.currentVideo.id}&type=video&maxResults=18&key=${ApiKey}`)
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${this.props.currentVideo.id}&type=video&maxResults=25&key=${ApiKey}`)
     console.log(response);
     this.setState({
       relatedVideos: response.data.items,

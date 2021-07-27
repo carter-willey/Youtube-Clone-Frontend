@@ -67,6 +67,15 @@ class CommentsForm extends Component {
     this.getComments();
   };
 
+  getReplies = async (commentId) => {
+    let response = await axios.get(
+      `http://127.0.0.1:8000/videos/reply/${commentId}/`)
+      return response;
+    // ).then((response) => {
+    //   return response.data;
+    // })
+  };
+
   likeComment = async (comment) => {
     await axios.patch(
       `http://127.0.0.1:8000/videos/comments/like/${comment.id}/`
@@ -103,6 +112,7 @@ class CommentsForm extends Component {
             getReplies={this.getReplies}
             likeComment={this.likeComment}
             dislikeComment={this.dislikeComment}
+            replies={this.state.replies}
           />
           <ReplyComments
             comments={this.state.comments}
