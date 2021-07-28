@@ -33,6 +33,7 @@ class CommentsForm extends Component {
 
   getReplies = async () => {
     let replyData = [];
+    
     await Promise.all(
       this.state.comments.map((comment) =>
         axios
@@ -44,8 +45,10 @@ class CommentsForm extends Component {
           })
       )
     );
+    //merges array into single array, so in displaycomments it will only have to map over one array for the data
+    let mergedReplyData = [].concat.apply([], replyData)
     this.setState({
-      replies: replyData,
+      replies: mergedReplyData,
     });
   };
 
@@ -60,6 +63,7 @@ class CommentsForm extends Component {
     if (this.state.commentInput !== "") {
       this.postComment();
     }
+
   };
 
   postComment = async () => {
@@ -76,7 +80,6 @@ class CommentsForm extends Component {
   };
 
   handleReply = (event, reply, comment) => {
-    console.log(comment)
     event.preventDefault();
     if (reply !== "") {
       this.postReply(reply, comment);
@@ -84,7 +87,6 @@ class CommentsForm extends Component {
   };
 
   postReply = async (newReply, currentComment) => {
-    debugger
     const commentId = currentComment.id
     const videoId = this.props.determineId();
     let reply= newReply
@@ -94,7 +96,6 @@ class CommentsForm extends Component {
       comment_text: reply
     };
     await axios.post(`http://127.0.0.1:8000/videos/post_reply/${commentId}/`, data)
-    console.log('hi u made it')
     this.getComments()
   };
 
@@ -135,6 +136,7 @@ class CommentsForm extends Component {
             replies={this.state.replies}
             incrementCounter={this.incrementCounter}
             handleReply={this.handleReply}
+            getReplies={this.getReplies}
           />
           <ReplyComments
             comments={this.state.comments}

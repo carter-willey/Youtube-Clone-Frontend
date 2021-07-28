@@ -4,7 +4,7 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import './displayComments.css'
 
-const DisplayComments = (props) => {
+const DisplayComments = (props) => { 
   const [reply, setReply] = useState("")
   return props.comments.map((comment) => {
     let value;
@@ -23,7 +23,7 @@ const DisplayComments = (props) => {
       </form>
     </div>
     if (props.replies.length !== 0){
-    value = props.replies[0].map((reply) => {
+    value = props.replies.map((reply) => {
       if(reply.comment === comment.id){
           return reply = 
         <div>
