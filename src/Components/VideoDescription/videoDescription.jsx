@@ -5,7 +5,7 @@ import ShowMoreText from "react-show-more-text";
 const VideoDescription = (props) => {
   return (
     <div>
-      <h1 className="position-relative">{props.currentVideo.snippet.title}</h1>
+      <div className="videoTitle">{props.currentVideo.snippet.title}</div>
       <ShowMoreText
         className="video_description"
         lines={3}

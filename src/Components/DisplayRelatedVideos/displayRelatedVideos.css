@@ -1,0 +1,7 @@
+.card-container:hover {
+    transform: scale(1.05)
+}
+
+.video-container {
+    padding: 15px;
+}

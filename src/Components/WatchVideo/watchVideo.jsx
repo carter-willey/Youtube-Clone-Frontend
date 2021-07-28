@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import VideoDescription from "../VideoDescription/videoDescription";
 import DisplayRelatedVideos from "../DisplayRelatedVideos/displayRelatedVideos";
 import "./watchVideo.css";
@@ -52,8 +52,10 @@ class WatchVideo extends Component {
     let url = this.determineUrl();
     return (
       <div>
-        <div>
-          <div className="videoPlayer">
+        <div className="videoPlayer">
+          <Container>
+            <Row>
+              <Col>
             <iframe
               id="ytplayer"
               type="text/html"
@@ -62,8 +64,12 @@ class WatchVideo extends Component {
               src={url}
               frameborder="0"
             ></iframe>
-          </div>
+            </Col>
+            <Col>
           <VideoDescription currentVideo={this.props.currentVideo} />
+          </Col>
+          </Row>
+          </Container>
         </div>
         <CommentsForm
           currentVideo={this.props.currentVideo}

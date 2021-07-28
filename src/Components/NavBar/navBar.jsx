@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Navbar,
   Nav,
-  NavDropdown,
   Form,
   FormControl,
   Button,
@@ -30,8 +29,8 @@ class NavBar extends Component {
 
   render() {
     return (
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#">Youtube Clone</Navbar.Brand>
+      <Navbar style={{backgroundColor: '#16181b'}} expand="lg">
+        <Navbar.Brand style={{color: '#fff'}}>Youtube Clone</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -39,22 +38,8 @@ class NavBar extends Component {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link as={Link} to="/">
+            <Nav.Link style={{color: '#fff', marginRight: '10px'}} as={Link} to="/">
               Home
-            </Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#" disabled>
-              Link
             </Nav.Link>
           </Nav>
           <Form className="d-flex" onSubmit={this.handleSubmit}>
@@ -67,7 +52,7 @@ class NavBar extends Component {
               name="searchQuery"
             />
             <Link to="/search/">
-            <Button  type='submit' onClick={() => {this.props.getSearchResults(this.state.searchQuery)}} variant="outline-success">Search</Button>
+            <Button  style={{color: '#fff', marginLeft: '10px'}} type='submit' onClick={() => {this.props.getSearchResults(this.state.searchQuery)}} variant="outline-light">Search</Button>
             </Link>
           </Form>
         </Navbar.Collapse>
