@@ -37,6 +37,7 @@ class WatchVideo extends Component {
     this.getRelatedVideos();
   }
 
+
   getRelatedVideos = async () => {
     let id = this.determineId();
     let response = await axios.get(

@@ -15,6 +15,7 @@ class App extends Component {
       mostPopularVideos: [],
       currentVideo: [],
       searchResults: [],
+      update: false
     };
   }
 
@@ -48,6 +49,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('render has been invoked')
     return (
       <Router>
         <NavBar getSearchResults={this.getSearchResults} />
@@ -60,6 +62,7 @@ class App extends Component {
           </Route>
           <Route path={`/watchVideo/:id`}>
             <WatchVideo
+            
               currentVideo={this.state.currentVideo}
               getVideo={this.getVideo}
             />
@@ -68,6 +71,7 @@ class App extends Component {
             <DisplaySearchResults
               searchResults={this.state.searchResults}
               getVideo={this.getVideo}
+              
             />
           </Route>
         </Switch>

@@ -18,6 +18,13 @@ class CommentsForm extends Component {
   componentDidMount() {
     this.getComments();
   }
+  componentDidUpdate(prevProps) {
+    console.log('we made it')
+    if(prevProps.currentVideo.id.videoId !== this.props.currentVideo.id.videoId){
+      this.getComments()
+      
+    }
+  }
 
   getComments = async () => {
     const videoId = this.props.determineId();

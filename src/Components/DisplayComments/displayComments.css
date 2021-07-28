@@ -45,3 +45,14 @@
     border-bottom: 2px solid #353946;
     color: #fff;
 }
+
+.replyButton {
+    background-color: #353946;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.replyButton:focus {
+    border: none;
+    outline: none;
+}

@@ -19,7 +19,7 @@ const DisplayComments = (props) => {
       placeholder='Write a reply...'
       onChange={(event) => setReply(event.target.value)}
       ></input>
-      <button>Reply</button>
+      <button className='replyButton'>Reply</button>
       </form>
     </div>
     if (props.replies.length !== 0){
