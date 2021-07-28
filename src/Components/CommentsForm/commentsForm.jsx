@@ -88,10 +88,8 @@ class CommentsForm extends Component {
   };
 
   render() {
-    
     if (this.state.loading) return null;
-    else if (this.state.replies.length === 0) return null;
-    else {
+    else{
       return (
         <div>
           <form className="comment_form"onSubmit={this.handleSubmit}>

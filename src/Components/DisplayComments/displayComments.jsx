@@ -4,9 +4,10 @@ import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import './displayComments.css'
 
 const DisplayComments = (props) => {
-  console.log(props.replies)
   return props.comments.map((comment) => {
-    let value = props.replies[0].map((reply) => {
+    let value;
+    if (props.replies.length !== 0){
+    value = props.replies[0].map((reply) => {
       if(reply.comment_id === comment.id){
           return reply = 
         <div>
@@ -26,6 +27,7 @@ const DisplayComments = (props) => {
         </div>
       }
     });
+    }
       return (
         <div>
           <h5 className="commentHeader">Anonymous</h5>
