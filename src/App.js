@@ -23,14 +23,12 @@ class App extends Component {
   }
 
   getSearchResults = async (search) => {
-    console.log(search);
     let response = await axios.get(
       `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=32&q=${search}&key=${ApiKey}`
     );
     this.setState({
       searchResults: response.data.items,
     });
-    console.log(response);
   };
 
   getPopularVideos = async () => {

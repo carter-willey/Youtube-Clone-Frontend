@@ -22,28 +22,33 @@ class CommentsForm extends Component {
   getComments = async () => {
     const videoId = this.props.determineId();
     let response = await axios.get(`http://127.0.0.1:8000/videos/${videoId}/`);
-    console.log(response)
-    this.setState({
-      comments: response.data,
-      loading: false,
-    },this.getReplies);
+    this.setState(
+      {
+        comments: response.data,
+        loading: false,
+      },
+      this.getReplies
+    );
   };
 
   getReplies = async () => {
     let replyData = [];
     await Promise.all(
       this.state.comments.map((comment) =>
-        axios.get(`http://127.0.0.1:8000/videos/reply/${comment.id}/`).then((response) => {
+        axios
+          .get(`http://127.0.0.1:8000/videos/reply/${comment.id}/`)
+          .then((response) => {
             if (response.data.length !== 0) {
               replyData.push(response.data);
             }
-          }))
-        );
+          })
+      )
+    );
     this.setState({
       replies: replyData,
-    },);
-    
+    });
   };
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -55,9 +60,6 @@ class CommentsForm extends Component {
     if (this.state.commentInput !== "") {
       this.postComment();
     }
-    this.setState({
-      commentInput: "",
-    });
   };
 
   postComment = async () => {
@@ -73,6 +75,29 @@ class CommentsForm extends Component {
     this.getComments();
   };
 
+  handleReply = (event, reply, comment) => {
+    console.log(comment)
+    event.preventDefault();
+    if (reply !== "") {
+      this.postReply(reply, comment);
+    }
+  };
+
+  postReply = async (newReply, currentComment) => {
+    debugger
+    const commentId = currentComment.id
+    const videoId = this.props.determineId();
+    let reply= newReply
+    const data = {
+      video_id: videoId,
+      comment: commentId,
+      comment_text: reply
+    };
+    await axios.post(`http://127.0.0.1:8000/videos/post_reply/${commentId}/`, data)
+    console.log('hi u made it')
+    this.getComments()
+  };
+
   likeComment = async (comment) => {
     await axios.patch(
       `http://127.0.0.1:8000/videos/comments/like/${comment.id}/`
@@ -86,27 +111,30 @@ class CommentsForm extends Component {
     );
     this.getComments();
   };
-
   render() {
     if (this.state.loading) return null;
-    else{
+    else {
       return (
         <div>
-          <form className="comment_form"onSubmit={this.handleSubmit}>
-              <input
-                placeholder="Write a comment..."
-                className="comment_input"
-                name="commentInput"
-                type="text"
-                onChange={this.handleChange}
-              ></input>
-              <button className="comment_button" type="submit">Comment</button>
+          <form className="comment_form" onSubmit={this.handleSubmit}>
+            <input
+              placeholder="Write a comment..."
+              className="comment_input"
+              name="commentInput"
+              type="text"
+              onChange={this.handleChange}
+            ></input>
+            <button className="comment_button" type="submit">
+              Add Comment
+            </button>
           </form>
           <DisplayComments
             comments={this.state.comments}
             likeComment={this.likeComment}
             dislikeComment={this.dislikeComment}
             replies={this.state.replies}
+            incrementCounter={this.incrementCounter}
+            handleReply={this.handleReply}
           />
           <ReplyComments
             comments={this.state.comments}

@@ -1,18 +1,47 @@
 .commentHeader {
     color: #fff;
     border-top: 2px solid #353946;
+    padding-left: 10px;
 }
 
 .commentBody {
     font-size: 0.9rem;
     color: #fff;
-}
-
-.commentIcon {
-    width: 50px;
-    height: 50px;
+    padding-left: 10px;
 }
 
 .commentOption {
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+.replyHeader {
+    color: #fff;
+    border-top: 2px solid #353946;
+    padding-left: 100px;
+}
+
+.replyBody {
+    font-size: 0.9rem;
+    color: #fff;
+    padding-left: 100px;
+}
+
+.replyOption {
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+.replyOptionsPosition {
+    display: flex;
+    padding-left: 100px;
+}
+
+.reply_input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #353946;
     color: #fff;
 }
