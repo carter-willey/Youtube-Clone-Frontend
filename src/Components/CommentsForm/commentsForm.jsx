@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "./commentsForm.css";
 import DisplayComments from "../DisplayComments/displayComments";
 import ReplyComments from "../ReplyComments/replyComments";
 
@@ -21,26 +22,28 @@ class CommentsForm extends Component {
   getComments = async () => {
     const videoId = this.props.determineId();
     let response = await axios.get(`http://127.0.0.1:8000/videos/${videoId}/`);
+    console.log(response)
     this.setState({
       comments: response.data,
       loading: false,
-    });
-    this.getReplies(this.state.comments);
+    },this.getReplies);
   };
 
-  getReplies = async (comments) => {
-  let replyData = []
-  await Promise.all(comments.map(
-    comment => axios.get(`http://127.0.0.1:8000/videos/reply/${comment.id}/`).then(response => {
-      if(response.data.length !== 0){
-        debugger
-        console.log(response.data)
-        replyData.push(response);
-      }
-    })
-  ))
-  // console.log(replyData)
-  }
+  getReplies = async () => {
+    let replyData = [];
+    await Promise.all(
+      this.state.comments.map((comment) =>
+        axios.get(`http://127.0.0.1:8000/videos/reply/${comment.id}/`).then((response) => {
+            if (response.data.length !== 0) {
+              replyData.push(response.data);
+            }
+          }))
+        );
+    this.setState({
+      replies: replyData,
+    },);
+    
+  };
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -85,25 +88,24 @@ class CommentsForm extends Component {
   };
 
   render() {
+    
     if (this.state.loading) return null;
+    else if (this.state.replies.length === 0) return null;
     else {
       return (
         <div>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              {" "}
-              Add Comment
+          <form className="comment_form"onSubmit={this.handleSubmit}>
               <input
+                placeholder="Write a comment..."
+                className="comment_input"
                 name="commentInput"
                 type="text"
                 onChange={this.handleChange}
               ></input>
-              <button type="submit">Submit</button>
-            </label>
+              <button className="comment_button" type="submit">Comment</button>
           </form>
           <DisplayComments
             comments={this.state.comments}
-            getReplies={this.getReplies}
             likeComment={this.likeComment}
             dislikeComment={this.dislikeComment}
             replies={this.state.replies}

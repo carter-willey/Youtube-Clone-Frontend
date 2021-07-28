@@ -1,0 +1,17 @@
+.comment_input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #353946;
+    color: #fff;
+}
+
+.comment_button {
+    background-color: #353946;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.comment_button:focus {
+    border: none;
+    outline: none;
+}
