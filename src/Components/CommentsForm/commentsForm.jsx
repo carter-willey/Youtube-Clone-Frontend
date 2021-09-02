@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./commentsForm.css";
 import DisplayComments from "../DisplayComments/displayComments";
-import ReplyComments from "../ReplyComments/replyComments";
+import { Container, Row, Col } from "react-bootstrap";
 
 class CommentsForm extends Component {
   constructor(props) {
@@ -19,10 +19,11 @@ class CommentsForm extends Component {
     this.getComments();
   }
   componentDidUpdate(prevProps) {
-    console.log('we made it')
-    if(prevProps.currentVideo.id.videoId !== this.props.currentVideo.id.videoId){
-      this.getComments()
-      
+    console.log("we made it");
+    if (
+      prevProps.currentVideo.id.videoId !== this.props.currentVideo.id.videoId
+    ) {
+      this.getComments();
     }
   }
 
@@ -40,7 +41,7 @@ class CommentsForm extends Component {
 
   getReplies = async () => {
     let replyData = [];
-    
+
     await Promise.all(
       this.state.comments.map((comment) =>
         axios
@@ -53,7 +54,7 @@ class CommentsForm extends Component {
       )
     );
     //merges array into single array, so in displaycomments it will only have to map over one array for the data
-    let mergedReplyData = [].concat.apply([], replyData)
+    let mergedReplyData = [].concat.apply([], replyData);
     this.setState({
       replies: mergedReplyData,
     });
@@ -70,7 +71,6 @@ class CommentsForm extends Component {
     if (this.state.commentInput !== "") {
       this.postComment();
     }
-
   };
 
   postComment = async () => {
@@ -94,16 +94,19 @@ class CommentsForm extends Component {
   };
 
   postReply = async (newReply, currentComment) => {
-    const commentId = currentComment.id
+    const commentId = currentComment.id;
     const videoId = this.props.determineId();
-    let reply= newReply
+    let reply = newReply;
     const data = {
       video_id: videoId,
       comment: commentId,
-      comment_text: reply
+      comment_text: reply,
     };
-    await axios.post(`http://127.0.0.1:8000/videos/post_reply/${commentId}/`, data)
-    this.getComments()
+    await axios.post(
+      `http://127.0.0.1:8000/videos/post_reply/${commentId}/`,
+      data
+    );
+    this.getComments();
   };
 
   likeComment = async (comment) => {
@@ -124,19 +127,26 @@ class CommentsForm extends Component {
     else {
       return (
         <div>
-          <form className="comment_form" onSubmit={this.handleSubmit}>
-            <input
-              placeholder="Write a comment..."
-              className="comment_input"
-              name="commentInput"
-              type="text"
-              onChange={this.handleChange}
-            ></input>
-            <button className="comment_button" type="submit">
-              Add Comment
-            </button>
-          </form>
-          <DisplayComments
+          <Container>
+            <Row>
+              <Col sm={10}>
+                <form className="comment_form mt-2" onSubmit={this.handleSubmit}>
+                  <input
+                    placeholder="Write a comment..."
+                    className="comment_input"
+                    name="commentInput"
+                    type="text"
+                    onChange={this.handleChange}
+                  ></input>
+                  <button className="comment_button ms-2 mb-2" type="submit">
+                    Add Comment
+                  </button>
+                </form>
+              </Col>
+              <Col sm={2}></Col>
+            </Row>
+          </Container>
+            <DisplayComments
             comments={this.state.comments}
             likeComment={this.likeComment}
             dislikeComment={this.dislikeComment}
@@ -144,11 +154,6 @@ class CommentsForm extends Component {
             incrementCounter={this.incrementCounter}
             handleReply={this.handleReply}
             getReplies={this.getReplies}
-          />
-          <ReplyComments
-            comments={this.state.comments}
-            video={this.props.currentVideo}
-            getReplies={this.state.replies}
           />
         </div>
       );
