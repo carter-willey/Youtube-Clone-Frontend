@@ -10,22 +10,26 @@ const DisplayMostPopularVideos = (props) => {
   {props.mostPopularVideos.map((video) => {
     return (
       <React.Fragment key={video.id}>
-        <Card className="card-container" style={{ width: "18rem" }}>
+        <Card className="card-container m-2" style={{ width: "18rem" }}>
           <Card.Img
             variant="top"
             src={video.snippet.thumbnails.medium.url}
           />
           <Card.Body>
             <Card.Title>{video.snippet.title}</Card.Title>
+            <Container>
             <Link to={`/watchVideo/${video.id}/`}>
-              <Button
+              
+              <Button className=""
                 onClick={() => {
                   props.getVideo(video);
                 }}
               >
                 Watch Video
               </Button>
+              
             </Link>
+            </Container>
           </Card.Body>
         </Card>
       </React.Fragment>

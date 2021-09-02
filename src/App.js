@@ -49,7 +49,6 @@ class App extends Component {
   };
 
   render() {
-    console.log('render has been invoked')
     return (
       <Router>
         <NavBar getSearchResults={this.getSearchResults} />

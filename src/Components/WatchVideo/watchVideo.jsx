@@ -52,26 +52,24 @@ class WatchVideo extends Component {
   render() {
     let url = this.determineUrl();
     return (
-      <div>
-        <div className="videoPlayer">
+      <React.Fragment>
           <Container>
             <Row>
-              <Col>
+              <Col sm={6}>
             <iframe
               id="ytplayer"
               type="text/html"
-              width="640"
+              width="100%"
               height="360"
               src={url}
               frameborder="0"
             ></iframe>
             </Col>
-            <Col>
+            <Col sm={6}>
           <VideoDescription currentVideo={this.props.currentVideo} />
           </Col>
           </Row>
           </Container>
-        </div>
         <CommentsForm
           currentVideo={this.props.currentVideo}
           determineId={this.determineId}
@@ -80,7 +78,7 @@ class WatchVideo extends Component {
           getVideo={this.props.getVideo}
           relatedVideos={this.state.relatedVideos}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
