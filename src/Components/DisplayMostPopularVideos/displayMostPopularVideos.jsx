@@ -15,12 +15,12 @@ const DisplayMostPopularVideos = (props) => {
             variant="top"
             src={video.snippet.thumbnails.medium.url}
           />
-          <Card.Body>
-            <Card.Title>{video.snippet.title}</Card.Title>
+          <Card.Body className="text-center">
+            <Card.Title style={{color: "white"}}>{video.snippet.title}</Card.Title>
             <Container>
             <Link to={`/watchVideo/${video.id}/`}>
               
-              <Button className=""
+              <Button className="mt-3"
                 onClick={() => {
                   props.getVideo(video);
                 }}

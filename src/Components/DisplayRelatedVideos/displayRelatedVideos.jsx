@@ -15,7 +15,7 @@ const DisplayRelatedVideos = (props) => {
         {filteredVideos.map((video) => {
           return (
             <React.Fragment key={video.id.videoId}>
-              <Card className="card-container m-2" style={{ width: "18rem", backgroundColor: '#16181b', borderColor: "#16181b" }}>
+              <Card className="card-container m-2" style={{ width: "18rem" }}>
                 <Card.Img
                   variant="top"
                   src={video.snippet.thumbnails.medium.url}

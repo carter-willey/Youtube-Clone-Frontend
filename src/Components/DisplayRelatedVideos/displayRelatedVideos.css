@@ -1,5 +1,7 @@
 .card-container {
     box-shadow: 3px 3px 6px white;
+    background-color: #16181b !important;
+    border-color: #16181b !important;
 }
 
 .card-container:hover {
