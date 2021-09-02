@@ -77,6 +77,7 @@ class WatchVideo extends Component {
         <DisplayRelatedVideos
           getVideo={this.props.getVideo}
           relatedVideos={this.state.relatedVideos}
+          getRelatedVideos={this.getRelatedVideos}
         />
       </React.Fragment>
     );

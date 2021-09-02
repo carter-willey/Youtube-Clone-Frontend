@@ -30,7 +30,7 @@ class NavBar extends Component {
   render() {
     return (
       <Navbar style={{backgroundColor: '#16181b'}} expand="lg">
-        <Navbar.Brand style={{color: '#fff'}}>Youtube Clone</Navbar.Brand>
+        <Navbar.Brand className="ms-5" style={{color: '#fff'}}>Youtube Clone</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav

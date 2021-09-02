@@ -1,3 +1,7 @@
+.card-container {
+    box-shadow: 3px 3px 6px white;
+}
+
 .card-container:hover {
     transform: scale(1.05)
 }

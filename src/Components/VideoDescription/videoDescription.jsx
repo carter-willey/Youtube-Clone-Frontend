@@ -4,7 +4,7 @@ import ShowMoreText from "react-show-more-text";
 
 const VideoDescription = (props) => {
   return (
-    <div>
+    <div className="text-center">
       <div className="videoTitle">{props.currentVideo.snippet.title}</div>
       <ShowMoreText
         className="video_description"
